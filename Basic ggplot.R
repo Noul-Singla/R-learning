@@ -3,13 +3,15 @@
 #install.packages("ggplot2") 
 
 #need to load the library(ggplot2)
-#library(ggplot2)
+library(ggplot2)
 
 
 #a few examples of how ggplot works
-#using a dataset already present in R and plotting displ or engine capacity and highway Milage
+#using a dataset mpr contained in ggplot in R 
+#plotting displ or engine capacity and highway Milage
 
 #first we use ggplot to create a base or frame with axis
+#for this we need to tell the data and aesthetic source to the ggplot
 #param : provide the data and what x and y axis will represent, it will create grid line itself
 ggplot(data=mpg,aes(x=displ,y=hwy)) 
 
@@ -55,4 +57,85 @@ ggplot(data=mpg,aes(x=displ,y=hwy)) +
 #alternatively we can override the stat here for bar to show values and not count frequency
 ggplot(data=mpg,aes(x=displ,y=hwy)) +
   geom_bar(stat="identity")
+
+
+
+#alternatively we can give aesthetic with geom as well
+ggplot(data=mpg) +
+  geom_point(aes(x=displ,y=hwy))
+
+#a few frequency charts, bar is majorly used for categorical
+  ggplot(data=mpg,aes(x=displ))+
+    geom_bar()
+  
+  #histogram is used for continous variable
+  ggplot(data=mpg,aes(x=hwy))+
+    geom_histogram()
+  
+  #we can define range for each bar
+  ggplot(data=mpg,aes(x=hwy))+
+    geom_histogram(binwidth=5)
+
+
+#To add third dimension to plots we can use the color
+#using cyl(continous) to differentiate the points based on color 
+ggplot(data=mpg,aes(x=displ,y=hwy,col=cyl)) +
+  geom_point()
+
+#using class(categorical) to differentiate the points based on color 
+ggplot(data=mpg,aes(x=displ,y=hwy,col=class)) +
+  geom_point()
+
+#another way to do this is add the shape but shape can only take categorical
+ggplot(data=mpg,aes(x=displ,y=hwy,shape=class)) +
+  geom_point()
+
+
+#we can have 4 diemension using both of these together
+ggplot(data=mpg,aes(x=displ,y=hwy,shape=trans,col=class)) +
+  geom_point()
+
+
+
+#we saw earlier ggplot is a layer based approach, so we can plot multiple plot on top
+ggplot(data=mpg,aes(x=displ,y=hwy)) +
+  geom_point()+
+  geom_line()
+
+#a useful geom is geom_smooth which shows the trend of data
+ggplot(data=mpg,aes(x=displ,y=hwy)) +
+  geom_point()+
+  geom_smooth()
+
+#another imporatant feature is multiple plots
+#for this we use facet_wrap and note  ~ before the seprater column name
+ggplot(data=mpg,aes(x=displ,y=hwy)) +
+  geom_point()+
+  facet_wrap(.~class)
+#here a separate plot for each value of class is plotted
+
+# we can also use facet_grid which has all charts in 1 row
+ggplot(data=mpg,aes(x=displ,y=hwy)) +
+  geom_point()+
+  facet_grid(.~class)
+
+# we can also use facet_grid which has all charts in 1 column
+ggplot(data=mpg,aes(x=displ,y=hwy)) +
+  geom_point()+
+  facet_grid(.~class)
+
+# we can also have 2 variable where the true use of grid over wrap is
+ggplot(data=mpg,aes(x=displ,y=hwy)) +
+  geom_point()+
+  facet_grid(drv~class)
+
+
+
+
+
+
+
+
+
+
 
