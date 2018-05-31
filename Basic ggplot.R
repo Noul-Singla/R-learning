@@ -175,10 +175,29 @@ plot
 #you can remove the hjust and see what it did.
 #usefull when text are long and overlapping
     
-    
-             
+#bars provide stacked data, here we fill bars based on drive type
+ggplot(mpg,aes(class))+
+  geom_bar(aes(fill=drv))
 
+#bars can be altered to be side by side
+ggplot(mpg,aes(class))+
+  geom_bar(aes(fill=drv),position="dodge")
 
+#bars can be altered to be side by side
+barplot <- ggplot(mpg,aes(class))+
+  geom_bar(aes(fill=drv),position="dodge")
+#changing theme of legend box
 
+barplot+
+  labs(fill="Drive type")+
+  theme(legend.position = "bottom")
 
+#move legend box to top
+barplot+
+  labs(fill="Drive type")+
+  theme(legend.position = "top")
 
+#remove legend box
+barplot+
+  labs(fill="Drive type")+
+  theme(legend.position = "none")
