@@ -132,8 +132,51 @@ ggplot(data=mpg,aes(x=displ,y=hwy)) +
 
 
 
+#Now here ggplot theme will be explored
 
+#add a title,xlabel,ylabel and a subtitle to a plot
+ggplot(data=mpg,aes(x=displ,y=hwy)) +
+  geom_point()+
+  labs(title="Highway milage Vs Engine displacement",
+       x="Engine Displacement",
+       y="Highway Milage",
+       subtitle="This chart show a negative trend")
 
+#add theme to add a colour and align the title in middle
+plot <- ggplot(data=mpg,aes(x=displ,y=hwy)) +
+  geom_point()+
+  labs(title="Highway milage Vs Engine displacement",
+       x="Engine Displacement",
+       y="Highway Milage",
+       subtitle="This chart show a negative trend")+
+  theme(plot.title=element_text(colour="red",hjust=0.5))
+
+#here we saved the plot in a variable, we can call variable to get the plot
+plot
+
+#here plot.title is telling we are adding theme to title 
+
+#let us add colour to x and y axis as well 
+      plot+
+        theme(plot.subtitle=element_text(hjust=0.5),
+        axis.title.x =element_text(colour="red"),
+        axis.title.y=element_text(colour="red"))
+
+# another useful features is to tilt the text on axis  
+    ggplot(mpg,aes(x=class,hwy))+
+      geom_point()+
+        theme(axis.text.x = element_text(angle=50))
+      
+# now text is overlapping the chart so we can move it
+    ggplot(mpg,aes(x=class,hwy))+
+      geom_point()+
+      theme(axis.text.x = element_text(angle=50,hjust=1))
+#hjust jsutified to the left and the angle amde sure it tilted
+#you can remove the hjust and see what it did.
+#usefull when text are long and overlapping
+    
+    
+             
 
 
 
