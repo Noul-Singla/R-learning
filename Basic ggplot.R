@@ -111,7 +111,7 @@ ggplot(data=mpg,aes(x=displ,y=hwy)) +
 #for this we use facet_wrap and note  ~ before the seprater column name
 ggplot(data=mpg,aes(x=displ,y=hwy)) +
   geom_point()+
-  facet_wrap(.~class)
+  facet_wrap(~class)
 #here a separate plot for each value of class is plotted
 
 # we can also use facet_grid which has all charts in 1 row
